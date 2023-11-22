@@ -1,0 +1,71 @@
+<html mxlns:th="http://www.thymeleaf.org">
+  <head th:fragment="boardFragmentHead">
+    <link rel="stylesheet" href="/styles/board/index.css" />
+  </head>
+  <body>
+    <div th:fragment="boardFragment" class="board container">
+      <form action="/add" method="post">
+        <!-- <input type="text" name="title" /> -->
+        <div class="form-floating mb-3">
+          <input
+            type="text"
+            class="form-control"
+            name="title"
+            id="floatingInput"
+            placeholder="제목"
+          />
+          <label for="floatingInput">제목</label>
+        </div>
+
+        <!-- <textarea name="content" id="content" cols="30" rows="10"></textarea> -->
+        <div class="form-floating mb-3">
+          <textarea
+            class="form-control"
+            name="content"
+            placeholder="글"
+            id="floatingTextarea"
+          ></textarea>
+          <label for="floatingTextarea">내용</label>
+        </div>
+        <button class="btn btn-primary">글 올리기</button>
+      </form>
+      <div>
+        <!-- <ul>
+          <li th:each="item:${list}" th:object="${item}">
+            <h1 th:text="*{title}"></h1>
+            <p th:text="*{userId}"></p>
+          </li>
+        </ul> -->
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">제목</th>
+              <th scope="col">작성자</th>
+              <th scope="col">작성일자</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="item:${list}" th:object="${item}">
+              <th scope="row" th:text="*{id}"></th>
+              <td th:text="*{title}"></td>
+              <td th:text="*{userId}"></td>
+              <td th:text="*{createdAt}"></td>
+            </tr>
+            <!-- <tr>
+              <th scope="row">2</th>
+              <td>Jacob</td>
+              <td>Thornton</td>
+              <td>@fat</td>
+            </tr>
+            <tr>
+              <th scope="row">3</th>
+              <td colspan="2">Larry the Bird</td>
+              <td>@twitter</td>
+            </tr> -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

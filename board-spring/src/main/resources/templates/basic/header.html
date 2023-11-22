@@ -1,0 +1,16 @@
+<html lang="ko" mxlns:th="http://www.thymeleaf.org">
+  <head th:fragment="headerFragmentHead">
+    <link rel="stylesheet" href="/styles/header.css" />
+  </head>
+  <body>
+    <div
+      th:fragment="headerFragment"
+      id="header"
+      class="d-flex justify-content-between align-items-center px-2"
+    >
+      <a href="/"><button class="btn btn-secondary btn-sm">home</button></a>
+      <h1 th:text="${title}"></h1>
+      <div th:replace="/user/loginBox :: loginFragment"></div>
+    </div>
+  </body>
+</html>

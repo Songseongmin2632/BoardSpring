@@ -1,0 +1,198 @@
+<html mxlns:th="http://www.thymeleaf.org">
+  <head th:fragment="registFragmentHead">
+    <link rel="stylesheet" href="/styles/user/regist.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/css/bootstrap-datepicker.min.css"
+      integrity="sha512-34s5cpvaNG3BknEWSuOncX28vz97bRI59UnVtEEpFX536A7BtZSJHsDyFoCl8S7Dt2TPzcrCEoHBGeM4SUBDBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/css/bootstrap-datepicker.standalone.min.css"
+      integrity="sha512-D5/oUZrMTZE/y4ldsD6UOeuPR4lwjLnfNMWkjC0pffPTCVlqzcHTNvkn3dhL7C0gYifHQJAIrRTASbMvLmpEug=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/css/bootstrap-datepicker3.min.css"
+      integrity="sha512-aQb0/doxDGrw/OC7drNaJQkIKFu6eSWnVMAwPN64p6sZKeJ4QCDYL42Rumw2ZtL8DB9f66q4CnLIUnAw28dEbg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/css/bootstrap-datepicker3.standalone.min.css"
+      integrity="sha512-t+00JqxGbnKSfg/4We7ulJjd3fGJWsleNNBSXRk9/3417ojFqSmkBfAJ/3+zpTFfGNZyKxPVGwWvaRuGdtpEEA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/js/bootstrap-datepicker.min.js"
+      integrity="sha512-LsnSViqQyaXpD4mBBdRYeP6sRwJiJveh2ZIbW41EBrNmKxgr/LFZIiWT6yr+nycvhvauz8c2nYMhrP80YhG7Cw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/locales/bootstrap-datepicker.ko.min.js"
+      integrity="sha512-L4qpL1ZotXZLLe8Oo0ZyHrj/SweV7CieswUODAAPN/tnqN3PA1P+4qPu5vIryNor6HQ5o22NujIcAZIfyVXwbQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+  </head>
+  <body>
+    <div th:fragment="registFragment" class="container">
+      <!-- <div
+        id="parent"
+        style="background-color: cornsilk"
+        contenteditable="true"
+      >
+        부모
+        <div id="child1">
+          자식1
+          <div id="child-child">손자</div>
+        </div>
+        <div id="child2">자식2</div>
+      </div> -->
+      <form action="/user/regist" method="post" class="row" id="regist-form">
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="user-id">ID</span>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="ID"
+            aria-label="user-id"
+            aria-describedby="user-id"
+            name="userId"
+          />
+          <span class="input-group-text" id="password">PW</span>
+          <input
+            type="password"
+            class="form-control"
+            placeholder="password"
+            aria-label="password"
+            aria-describedby="password"
+            name="password"
+          />
+        </div>
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="name">Name</span>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Name"
+            aria-label="name"
+            aria-describedby="name"
+            id="name"
+            name="name"
+          />
+        </div>
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="phone">Phone</span>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Phone Number"
+            aria-label="phone"
+            aria-describedby="phone"
+            id="phone"
+            name="phone"
+          />
+        </div>
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="address">Address</span>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Address"
+            aria-label="address"
+            aria-describedby="address"
+            id="address"
+            name="address"
+          />
+        </div>
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="email">E-Mail</span>
+          <input
+            type="email"
+            class="form-control"
+            placeholder="example@gmail.com"
+            aria-label="email"
+            aria-describedby="email"
+            id="email"
+            name="email"
+          />
+        </div>
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="git-address">Github Address</span>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="https://github.com/example"
+            aria-label="git-address"
+            aria-describedby="git-address"
+            id="git-address"
+            name="git-address"
+          />
+        </div>
+
+        <div class="input-group mb-3">
+          <div class="input-group-text">
+            <input
+              type="radio"
+              class="form-check-input mt-0"
+              value="1"
+              aria-label="gender"
+              id="gender-male"
+              name="gender"
+            />
+          </div>
+          <label for="gender-male" class="form-control">Male</label>
+          <div class="input-group-text">
+            <input
+              type="radio"
+              class="form-check-input mt-0"
+              value="2"
+              aria-label="gender"
+              id="gender-female"
+              name="gender"
+            />
+          </div>
+          <label for="gender-female" class="form-control">Female</label>
+        </div>
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="birth">Birth Day</span>
+          <input
+            type="text"
+            class="form-control"
+            aria-label="birth"
+            aria-describedby="birth"
+            id="datePicker"
+            name="birth"
+            autocomplete="off"
+          />
+        </div>
+
+        <!-- <div class="input-group mb-3">
+          <span class="input-group-text" id="birth">Birth Day</span>
+          <input
+            type="date"
+            class="form-control"
+            aria-label="birth"
+            aria-describedby="birth"
+            id="birth"
+            name="birth"
+          />
+        </div> -->
+        <div class="input-group">
+          <button class="btn btn-primary btn-lg m-auto">Sign in</button>
+        </div>
+      </form>
+      <script src="/scripts/user/regist.js"></script>
+    </div>
+  </body>
+</html>

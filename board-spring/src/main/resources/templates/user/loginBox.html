@@ -1,0 +1,41 @@
+<html lang="ko" mxlns:th="http://www.thymeleaf.org">
+  <body>
+    <div th:fragment="loginFragment">
+      <div th:if="${session.userName != null}">
+        [[${session.userName}]], 어서오세요
+        <a href="/user/logout"
+          ><button class="btn btn-danger btn-sm">Log Out</button></a
+        >
+      </div>
+      <form
+        th:if="${session.userName == null}"
+        action="/user/login"
+        method="post"
+        class="d-flex align-items-center mb-0"
+      >
+        <div class="input-group">
+          <input
+            type="text"
+            class="form-control form-control-sm"
+            placeholder="ID"
+            id="id"
+            name="userId"
+          />
+          <input
+            type="password"
+            class="form-control form-control-sm"
+            placeholder="PW"
+            id="password"
+            name="password"
+          />
+        </div>
+        <button class="btn btn-primary btn-sm">Sign in</button>
+        <a href="/user/regist"
+          ><button type="button" class="btn btn-secondary btn-sm">
+            Sign up
+          </button></a
+        >
+      </form>
+    </div>
+  </body>
+</html>
