@@ -9,6 +9,7 @@
       </div>
       <form
         th:if="${session.userName == null}"
+        id="login-form"
         action="/user/login"
         method="post"
         class="d-flex align-items-center mb-0"
@@ -36,6 +37,8 @@
           </button></a
         >
       </form>
+      <script src="/scripts/user/index.js"></script>
+      <script src="/scripts/user/login.js"></script>
     </div>
   </body>
 </html>
