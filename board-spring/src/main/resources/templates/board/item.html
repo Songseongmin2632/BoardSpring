@@ -1,0 +1,16 @@
+<html mxlns:th="http://www.thymeleaf.org">
+  <head th:fragment="boardItemFragmentHead">
+    <link rel="stylesheet" href="/styles/board/item.css" />
+    <head th:replace="~{/basic/userInfo :: userInfoFragmentHead}"></head>
+  </head>
+  <body>
+    <div th:fragment="boardItemFragment" th:object="${board}" class="container">
+      <div class="d-flex justify-content-between align-items-center">
+        <div th:replace="~{/basic/userInfo :: userInfoFragment}"></div>
+        <div th:text="*{createdAt}"></div>
+      </div>
+      <hr />
+      <p th:utext="*{content}"></p>
+    </div>
+  </body>
+</html>

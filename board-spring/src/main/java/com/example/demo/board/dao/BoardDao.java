@@ -21,28 +21,29 @@ public class BoardDao {
       // TODO Auto-generated method stub
       return new Board(rs.getInt("id"), rs.getString("title"), rs.getString("content"),
           rs.getInt("views"), 0, 0, rs.getTimestamp("created_at"), rs.getInt("is_withdrew") == 1,
-          rs.getInt("user_id"), rs.getString("userName"));
+          rs.getInt("user_id"), rs.getString("name"), rs.getString("git_address"));
     }
   };
 
   public void add(Board board) {
     jdbcTemplate.update(
-        "insert into boards (title, content, is_withdrew, user_id) values (?, ?, ?, ?)",
+        "insert into boards (\"title\", \"content\", \"is_withdrew\", \"user_id\") values (?, ?, ?, ?)",
         board.getTitle(), board.getContent(), board.isWithdrew() ? 1 : 0, board.getUserId());
   }
 
-  public List<Board> getAll() {
+  public Board get(int id) {
+    return jdbcTemplate.queryForObject(
+        "select boards.*, users.\"name\", users.\"git_address\" from boards join users on boards.\"user_id\"=users.\"id\" where boards.\"id\"=?",
+        mapper, id);
+  }
+
+  public List<Board> getAll(int idx, int count) {
     return jdbcTemplate.query(
-        "select boards.*, users.name as userName from boards join users on boards.user_id=users.id order by boards.id offset 2 rows fetch first 5 rows only",
-        mapper);
+        "select boards.*, users.\"name\", users.\"git_address\" from boards join users on boards.\"user_id\"=users.\"id\" order by boards.\"id\" desc offset ? rows fetch first ? rows only",
+        mapper, idx, count);
   }
 
-  public void fix(Board board) {
-    jdbcTemplate.update("update boards set title = ?, content = ? where id = ?", board.getTitle(),
-        board.getContent());
-  }
-
-  public void delete(Board board) {
-    jdbcTemplate.update("delete from boards where id = ?", board.getId());
+  public int getCount() {
+    return jdbcTemplate.queryForObject("select count(*) from boards", Integer.class);
   }
 }

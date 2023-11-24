@@ -1,0 +1,16 @@
+@charset "UTF-8";
+
+.user-git-address {
+  display: none;
+  border: 1px solid black;
+  border-radius: 1rem;
+  padding: 0.5rem 1rem;
+  position: absolute;
+  background-color: white;
+  z-index: 100;
+  transform: translateX(-10%);
+}
+
+.user-name:hover .user-git-address {
+  display: block;
+}

@@ -1,6 +1,7 @@
 <html mxlns:th="http://www.thymeleaf.org">
   <head th:fragment="boardFragmentHead">
     <link rel="stylesheet" href="/styles/board/index.css" />
+    <head th:replace="~{/basic/userInfo :: userInfoFragmentHead}"></head>
   </head>
   <body>
     <div th:fragment="boardFragment" class="board container">
@@ -20,8 +21,12 @@
           <tbody>
             <tr th:each="item:${list}" th:object="${item}">
               <th scope="row" th:text="*{id}"></th>
-              <td th:text="*{title}"></td>
-              <td th:text="*{userName}"></td>
+              <td>
+                <a th:href="@{/board/{id}(id=*{id})}" th:text="*{title}"></a>
+              </td>
+              <td>
+                <div th:replace="~{/basic/userInfo :: userInfoFragment}"></div>
+              </td>
               <td th:text="*{createdAt}"></td>
             </tr>
             <!-- <tr>
@@ -37,6 +42,42 @@
             </tr> -->
           </tbody>
         </table>
+        <div>
+          <nav
+            aria-label="Page navigation"
+            th:with="nowPage=${#numbers.formatInteger(param.page != null ? param.page : 1, 1)}, startPage=${nowPage} > 1 ? (${nowPage} > ${pageCount} - 2 ? ${pageCount} - 2 : ${nowPage} - 1) : 1"
+          >
+            <!-- page='11' => 11 -->
+            <ul class="pagination">
+              <li class="page-item" th:if="${nowPage} > 1">
+                <a
+                  class="page-link"
+                  th:href="@{/(page=${nowPage-1})}"
+                  aria-label="Previous"
+                >
+                  <span aria-hidden="true">&laquo;</span>
+                </a>
+              </li>
+              <li
+                th:each="page : ${#numbers.sequence(startPage, startPage + 2)}"
+                class="page-item"
+              >
+                <a class="page-link" th:href="@{/(page=${page})}">
+                  [[${page}]]
+                </a>
+              </li>
+              <li class="page-item" th:if="${nowPage} != ${pageCount}">
+                <a
+                  class="page-link"
+                  th:href="@{/(page=${nowPage} + 1)}"
+                  aria-label="Next"
+                >
+                  <span aria-hidden="true">&raquo;</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
       </div>
     </div>
   </body>

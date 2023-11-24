@@ -1,0 +1,17 @@
+<html mxlns:th="http://www.thymeleaf.org">
+  <head th:fragment="userInfoFragmentHead">
+    <link rel="stylesheet" href="/styles/userInfo.css" />
+  </head>
+  <body>
+    <div th:fragment="userInfoFragment" class="user-name">
+      <div th:text="*{userName}" class="user-name-data"></div>
+      <a
+        th:if="*{userGitAddress} != null"
+        class="user-git-address"
+        th:href="*{userGitAddress}"
+        target="_blank"
+        th:text="*{userGitAddress}"
+      ></a>
+    </div>
+  </body>
+</html>

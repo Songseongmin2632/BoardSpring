@@ -27,12 +27,12 @@ public class UserDao {
 
   public void add(User user) {
     jdbcTemplate.update(
-        "insert into users (user_id, password, name, phone, address, email, git_address, gender, birth) values (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+        "insert into users (\"user_id\", \"password\", \"name\", \"phone\", \"address\", \"email\", \"git_address\",\"gender\", \"birth\") values (?, ?, ?, ?, ?, ?, ?, ?, ?)",
         user.getUserId(), user.getPassword(), user.getName(), user.getPhone(), user.getAddress(),
         user.getEmail(), user.getGitAddress(), user.getGender(), user.getBirth());
   }
 
   public User get(String userId) {
-    return jdbcTemplate.queryForObject("select * from users where user_id = ?", mapper, userId);
+    return jdbcTemplate.queryForObject("select * from users where \"user_id\"=?", mapper, userId);
   }
 }
