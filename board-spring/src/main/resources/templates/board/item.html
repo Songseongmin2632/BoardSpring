@@ -1,6 +1,7 @@
 <html mxlns:th="http://www.thymeleaf.org">
   <head th:fragment="boardItemFragmentHead">
     <link rel="stylesheet" href="/styles/board/item.css" />
+    <head th:replace="~{/board/comment :: commentFragmentHead}"></head>
     <head th:replace="~{/basic/userInfo :: userInfoFragmentHead}"></head>
   </head>
   <body>
@@ -11,6 +12,7 @@
       </div>
       <hr />
       <p th:utext="*{content}"></p>
+      <div th:replace="~{/board/comment :: commentFragment}"></div>
     </div>
   </body>
 </html>

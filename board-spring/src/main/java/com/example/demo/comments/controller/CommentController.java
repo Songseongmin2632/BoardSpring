@@ -1,32 +1,34 @@
 package com.example.demo.comments.controller;
 
+import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import com.example.demo.comments.domain.Comment;
 import com.example.demo.comments.service.CommentService;
 
 @Controller
 @RequestMapping("/comments")
 public class CommentController {
-
   @Autowired
-  private CommentService commentService;
+  CommentService commentService;
 
-  @PostMapping("/board")
-  public String addComment(Map<String, String> data) {
-    Comment comment = new Comment(0, null, null, false, 0, 0, 0);
-    comment.setContent(data.get("content"));
-    comment.setUserId(Integer.parseInt(data.get("user_id")));
-    comment.setBoardId(Integer.parseInt(data.get("board_id")));
-    if (data.containsKey("comment_id") && !data.get("comment_id").isEmpty()) {
-      comment.setCommentId(Integer.parseInt(data.get("comment_id")));
-    }
+  @GetMapping
+  @ResponseBody
+  public List<Comment> getComments(@RequestParam Map<String, String> map) {
+    return commentService.getComments(Integer.parseInt(map.get("boardId")), 0);
+  }
 
-    commentService.addComment(comment);
-
-    return "redirect:/";
+  @PostMapping("add")
+  public String add(@RequestParam Map<String, String> map) {
+    Comment comment = new Comment(map.get("content"), Integer.parseInt(map.get("user_id")),
+        Integer.parseInt(map.get("board_id")));
+    commentService.add(comment);
+    return "redirect:/board/" + map.get("board_id");
   }
 }

@@ -1,0 +1,23 @@
+<html mxlns:th="http://www.thymeleaf.org">
+  <head th:fragment="commentFragmentHead">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- <link rel="stylesheet" href="/styles/board/add.css" /> -->
+  </head>
+  <body>
+    <div th:fragment="commentFragment">
+      <form
+        action="/comments/add"
+        method="post"
+        th:if="${session.userId} != null"
+      >
+        <input type="text" name="content" placeholder="Comment" />
+        <input type="hidden" name="user_id" th:value="${session.userId}" />
+        <input type="hidden" name="board_id" th:value="*{id}" />
+        <button>댓글 추가</button>
+      </form>
+      <hr />
+      <ul id="comment-list" th:data-board-id="*{id}"></ul>
+      <script src="/scripts/board/comment.js"></script>
+    </div>
+  </body>
+</html>
