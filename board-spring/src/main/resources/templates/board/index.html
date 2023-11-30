@@ -1,6 +1,7 @@
 <html mxlns:th="http://www.thymeleaf.org">
   <head th:fragment="boardFragmentHead">
     <link rel="stylesheet" href="/styles/board/index.css" />
+    <head th:replace="~{/board/addBoard :: addBoardFragmentHead}"></head>
     <head th:replace="~{/basic/userInfo :: userInfoFragmentHead}"></head>
   </head>
   <body>

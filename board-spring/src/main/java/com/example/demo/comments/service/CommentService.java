@@ -3,13 +3,13 @@ package com.example.demo.comments.service;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.example.demo.comments.dao.CommentDao;
+import com.example.demo.comments.dao.CommentDaoMysql;
 import com.example.demo.comments.domain.Comment;
 
 @Service
 public class CommentService {
   @Autowired
-  CommentDao commentDao;
+  CommentDaoMysql commentDao;
 
   public void add(Comment comment) {
     commentDao.add(comment);
@@ -37,5 +37,9 @@ public class CommentService {
       item.setChildren(getChildren(boardId, item));
     });
     return list;
+  }
+
+  public int getCountInBoard(int boardId) {
+    return commentDao.getCountInBoard(boardId);
   }
 }

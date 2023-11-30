@@ -19,5 +19,6 @@ public class Comment {
   private final int userId;
   private final int boardId;
   private int commentId;
+  private String userName;
   private List<Comment> children;
 }

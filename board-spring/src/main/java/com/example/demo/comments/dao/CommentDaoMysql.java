@@ -9,9 +9,8 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import com.example.demo.comments.domain.Comment;
 
-
 @Repository
-public class CommentDao {
+public class CommentDaoMysql {
   @Autowired
   JdbcTemplate jdbcTemplate;
 
@@ -27,30 +26,29 @@ public class CommentDao {
 
   public void add(Comment comment) {
     jdbcTemplate.update(
-        "insert into comments (\"content\", \"user_id\", \"board_id\", \"comment_id\") values (?, ?, ?, ?)",
+        "insert into comments (content, user_id, board_id, comment_id) values (?, ?, ?, ?)",
         comment.getContent(), comment.getUserId(), comment.getBoardId(),
         comment.getCommentId() > 0 ? comment.getCommentId() : null);
   }
 
   public List<Comment> getParents(int boardId, int start) {
     return jdbcTemplate.query(
-        "select comments.*, users.\"name\" from comments "
-            + "join users on comments.\"user_id\"=users.\"id\" "
-            + "where comments.\"board_id\" = ? and comments.\"comment_id\" is null "
-            + "order by comments.\"id\" desc " + "offset ? rows fetch first 5 rows only",
+        "select comments.*, users.name from comments " + "join users on comments.user_id=users.id "
+            + "where comments.board_id = ? and comments.comment_id is null "
+            + "order by comments.id desc " + "limit ?, 5",
         mapper, boardId, start);
   }
 
   public List<Comment> getChildren(int boardId, int commentId) {
-    return jdbcTemplate.query("select comments.*, users.\"name\" from comments "
-        + "join users on comments.\"user_id\"=users.\"id\" "
-        + "where comments.\"board_id\" = ? and comments.\"comment_id\" = ? "
-        + "order by comments.\"id\"", mapper, boardId, commentId);
+    return jdbcTemplate.query(
+        "select comments.*, users.name from comments " + "join users on comments.user_id=users.id "
+            + "where comments.board_id = ? and comments.comment_id = ? " + "order by comments.id",
+        mapper, boardId, commentId);
   }
 
   public int getCountInBoard(int boardId) {
     return jdbcTemplate.queryForObject(
-        "select count(*) from comments " + "where \"board_id\" = ? and \"comment_id\" is null",
+        "select count(*) from comments " + "where board_id = ? and comment_id is null",
         Integer.class, boardId);
   }
 }

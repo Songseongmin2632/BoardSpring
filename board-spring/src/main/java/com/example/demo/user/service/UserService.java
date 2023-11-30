@@ -3,13 +3,13 @@ package com.example.demo.user.service;
 import java.security.MessageDigest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.example.demo.user.dao.UserDao;
+import com.example.demo.user.dao.UserDaoMysql;
 import com.example.demo.user.domain.User;
 
 @Service
 public class UserService {
   @Autowired
-  UserDao userDao;
+  UserDaoMysql userDao;
 
   public void add(User user) {
     user.setPassword(cryptoPassword(user.getPassword()));
